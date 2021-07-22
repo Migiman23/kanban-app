@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-6">
+        <span data-toggle="tooltip" title={{tarea.titulo}}>
+            {{tarea.titulo.length > 18 ? tarea.titulo.substr(0,18) + '...' : tarea.titulo}}
+        </span>
+    </div>
+    <div class="col-md-6">
+        <button type="button" class="btn btn-primary btn-sm me-1" (click)="backStep()"
+            [disabled]="tarea.status === 'Backlog'" data-dismiss="modal"
+            data-toggle="tooltip" data-placement="bottom" title="Regresar"
+            >
+            <i class="fa fa-arrow-left fa-1x"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm me-1" (click)="nextStep()"
+            [disabled]="tarea.status === 'Done'" data-dismiss="modal"
+            data-toggle="tooltip" data-placement="bottom" title="Listo"
+            >
+            <i class="fa fa-arrow-right fa-1x"></i>
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="deleteTask()" data-dismiss="modal"
+        data-toggle="tooltip" data-placement="bottom" title="Eliminar">
+            <i class="fa fa-trash"></i>
+        </button>
+    </div>
+</div>
