@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Tarea } from '../models/tarea'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -9,16 +8,18 @@ import { v4 as uuidv4 } from 'uuid'
   styleUrls: ['./tareas.component.css']
 })
 export class TareasComponent implements OnInit {
-
   tarea: Tarea
   tareas: Tarea[]
   backlogList: Tarea[] = []
   toDoList: Tarea[] = []
   ongoingList: Tarea[] = []
   doneList: Tarea[] = []
+  openModal: Boolean
+  closeResult: string;
 
   constructor() {
     this.tarea = new Tarea('', '', '', '')
+    this.openModal = false
   }
 
   ngOnInit(): void {
@@ -33,26 +34,28 @@ export class TareasComponent implements OnInit {
       descripción: ''
     }
     let existe = false
-    if(this.backlogList.map(item => item.titulo).includes(tareaObject.titulo)) {
+    if (this.backlogList.map(item => item.titulo).includes(tareaObject.titulo)) {
       console.log('Existe');
       existe = true
     }
-    if(this.toDoList.map(item => item.titulo).includes(tareaObject.titulo)) {
+    if (this.toDoList.map(item => item.titulo).includes(tareaObject.titulo)) {
       console.log('Existe');
       existe = true
     }
-    if(this.ongoingList.map(item => item.titulo).includes(tareaObject.titulo)) {
+    if (this.ongoingList.map(item => item.titulo).includes(tareaObject.titulo)) {
       console.log('Existe');
       existe = true
     }
-    if(this.doneList.map(item => item.titulo).includes(tareaObject.titulo)) {
+    if (this.doneList.map(item => item.titulo).includes(tareaObject.titulo)) {
       console.log('Existe');
       existe = true
     }
-    if(!existe) {
+    if (!existe) {
       lista.push(tareaObject)
       this.backlogList = lista
       this.tarea.titulo = ''
+    } else {
+      var sign = window.alert('Está tarea ya existe');
     }
   }
   getBacklog(): void {
